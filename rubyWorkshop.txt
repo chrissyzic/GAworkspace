@@ -49,3 +49,68 @@ Ruby
 * Write a little bit of code, save it, test it.
 * Why are arrays indexed 0? A big nerd forever ago made it this way so that's what we do (there is a logical reason, but in most languages in use today they are this way, so just learn it!)
 
+
+Rails
+	MVC
+		- Model: the "things" of the app (for Ikea site: couches, bookshelves, shopping carts, user data)
+		- View: just what it sounds like
+		- Controller: Rails! There are specific and separate controllers for each "thing" or type/class in the database (model) May consult the model or may not, but responds to request from the dispatcher and returns information to the view
+		- Dispatcher: acts like a telephone operator, receives request from browser (HTML) and directs it to the right controller for the appropriate model or the right place in the "brain" or the app or website
+		- Example: Amazon.com/books, Dispatcher knows that anyone visiting a URL that begins with /books should go to the Books Controller, which will get information from the books models (stored as the file books.rb in our database), the Books Controller will then send it to a particular View, maybe index.html
+	Data Types
+		- String (<255 characters)
+		- Text (>= 255 characters)
+		- Integer
+		- Boolean
+		- Float
+		- Date
+		- Time
+		- Datetime
+	Relational Databases
+		- 1:1 (Each company has one account in, say, Salesforce)
+		- 1: many (Flickr)
+		- Many : many (Meetup.com)
+		- Syntax: has_one, has_many, belongs_to, has_one: through, has_many: through, etc. 
+			Belongs_to is for data that can't exist independent of that relationship ("chirps" need to be associated w a user)
+			The "through" relationships are for many : many relationships, basically they need a join table 
+	Our first app!
+		- You only have ONE database, the different chunks of the database are called "Tables"
+			- So, in our Tweeter database, we'll have a Users table and a Chirps table, each table has a number of attributes we'll keep track of (Users: screename, profile pic, bio, password, location)
+			- OK, so we know what data we'll need to keep track of, but we have to decide which data type each 
+			- Rows = "Records" and Columns = "Attributes"
+			- Random note: best practice for web apps is to not store images in your database because they take a LOT of memory. Images are stored as strings, the strings being URLs or links to CDN or externally hosted 
+		- rails new tweeter (rails new app_name, creates a new app with lots of folders in it)
+		- rails server (launches local server, can visit at localhost:3000 or whatever # spits back, command+T to start new terminal tab)
+		- in Gemfile, comment out gem jbuilder (line 22)
+		- rails generate scaffold chirp body:text user_id:integer 
+		- rake db:migrate (now when you visit localhost:3000/chirps, something will be there!)
+		- HTML goes in the "public" folder, txt and pdfs and whatever else can go there - just remember that people can navigate to anything you put there. Also note the CSS, JS, and Images are NOT in the Public folder, even though in lots of apps they are
+		- Apps folder has all M, V, and C folders. Also has CSS, JS, and Images in the "Assets" folder
+		- Config > routes.db is the dispatcher, add root 'chirps#index' which means "When someone goes to homepage, use chirps controller and do the index action"
+		- If you look at app > controllers > chirps_controller, you can see all the actions and rules of the chirps controller. The one line we wrote immediately above created this file and all the associated actions.
+			- Chirp.all is a database call
+		- Views > chirps > index.html.erb: the .erb extension lets the file know that there might be some Ruby code in it, similar to Django/Python, syntax for .erb <% ruby_goes_here %> or <%=  ruby_goes_here %>. If you need something to be returned, use the version with the =
+		- http://localhost:3000/rails/info/routes will show you in development mode all of the valid routes you can take in the app
+		- #New action: the form where we as non-technical users can input our message. When you click "submit" on tweeter.com/chirp/new, it's sent to the Chirps controller with the HTTP verb of "Post" which will trigger the #Create action 
+		- #Create action: translates chirp that user typed out into database language *Like translating a telegram into Morse code
+		- YOU ONLY NEED VIEWS FOR GET REQUESTS (USUALLY) - for non-GET requests, usually don't render a view
+		-Forms
+			- views > chirps > _form.html.erb is a "partial view" since the New and Edit views are so similar, you can create the shared section in a separate form then embed it, essentiall
+			- FYI, in case you're worried, all the DOCTYPE declaration and stylesheet calling is in views > layout > application.html.erb. So you don't have to repeat all that calling for every single view - this is the file where you'd add a navigation bar or a footer, for example
+		- Models
+			- To control from console: type '$ rails console'
+			- Chirp class inherits from ActiveRecord class, we get lots of methods "for free" this way
+			- Chirp.all
+			- my_chirp = Christ.first
+			- Chirp.create (body: "Text of chirp goes here", user_id: 1)
+			- can also create a new chirp with chirp = Chirp.new, then chirp.user_id = 1, then chirp.body = "Chirp text goes here", then finally Chirp.save
+			- firsty = Chirp.first, then firsty.update(body:"Chirp chirp! Hooray!")
+			- There are like a billion more methods inherited from the ActiveRecord class, but look up the documentation to find them!
+		- If you need users, go here and follow the instructions to set it up: https://github.com/plataformatec/devise
+		- RELATIONAL DATABASE TIME
+			- In the User.rb model, add relationship "has_many :chirps"
+			- In the Chirp.rb model, add relationship "belongs_to :user"
+
+sometimes i feel a little distant from my own emotions and get nostalgic for hs/college when i felt everything so deeply and spontaneously
+but then yesterday i unexpectedly heard the postal service and broke down sobbing so now i'm like nah actually i'm good thx.
+like how did i get anything done from the ages of 14 to 23? how did ANYONE? we were all insane, unpredictable, over-earnest little monsters.
