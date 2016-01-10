@@ -1,0 +1,51 @@
+Terminal
+	- Command + K clears terminal
+	- History
+	- rm, rmdir, rm -r
+	- Filenames that start w a dot are system files and are hidden by default
+
+Git
+	- git init (creates a file .git, system file and it's hidden! starts tracking what you're doing, only need to do it once)
+	- git add . (the single period indicating the current folder, git add .. would add the parent folder, can also git add filename so you don't have to expend energy staging files for commit that haven't been changed)
+	- git commit -m 'commit note goes here'
+	- git status (STOP skipping this)
+	- If you don't add a commit message, terminal will open up VIM which is a scary old text editor. If VIM pops up, type "I" to enter insert mode, the Esc + : : wq to save and quit
+	- git branch branchname (creates a new branch)
+	- git branch (shows you all the branches in this dir, asterick shows you where you are)
+	- git checkout branchname (change to the branch specific)
+
+Ruby
+	- irb (enter Ruby interactive mode in the terminal)
+	- Arithmetic operators: % operator is called "modulus," works exactly like it does in python
+	- Comparison operators: same as Python
+	- Equality assignment: +=, -=, *=, /=, **=, %= (instead of x = x + 1 can write x += 1)
+	- Data Types: integer (whole numbers, actually two classes in Ruby: fixnum and bignum), float (decimals), boolean (true or false - all lowercase in Ruby), string, date, time, arrays, hash, symbol
+	- Dot notation: .length, .reverese, .upcase, .class, .include? (mostly string methods that we've discussed so far today), .methods lists all the methods you can invoke on a particular piece of data
+	- Global vs. local variable: think of everything in a function as a "sealed box" - arguments are a good way to poke a hole in the sealed box, also: arguments are like a nickname
+	- logical operators
+	-Object-Oriented: Three main concepts
+		1. Classes are a blueprint
+		2. Objects are things that actually exist, have measureable qualities and can be manipulated, defined by rules of the class
+		3. Methods make objects do something
+	- Puts vs. Return
+		- Functions that have only puts, technically return nothing (or "nil")
+		- Can put the puts outside of the function 
+	-Loops
+		- Loop 1: a machine that paints a bottle red, does not need to know any info about the bottle to execute this loop
+		- Loop 2: a machine that paints a bottle red and prints the number of the bottle on the outside, in this case the machine DOES need to know info about the bottle in front of it
+	- Arrays
+		- All of these do different things (esp in terms of returns), try them out in interactive mode to see the difference:
+			[1,2,3].each { |num| num}
+			[1,2,3].each { |num| puts num}
+			[1,2,3].map { |num| num*num}
+			[1,2,3].map { |num| puts num*num}
+
+	- Hashes
+		*Imagine you should up at a party with a trunk full of gifts for a lot of people, you wouldn't say "Can you get me the gift in position 4" you would say "Can you get me Lisa's gift?" It doesn't matter where Lisa's gift is, position doesn't matter, only the tag on the outside of the gift (the PAIRING) is important
+		* If you were trying to find someone's house, however, you couldn't say "Go to Chrissy's house" you would say "Go to 358 Palmetto St" --> can also go back to bottle example.
+		- Keys can technically be any data type, but in practice, they are almost always either strings or symbols (symbols save a LOT of memory if you're dealing with hashes that have tons of key/value pairs or items)
+
+
+* Write a little bit of code, save it, test it.
+* Why are arrays indexed 0? A big nerd forever ago made it this way so that's what we do (there is a logical reason, but in most languages in use today they are this way, so just learn it!)
+
